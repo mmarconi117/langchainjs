@@ -1,6 +1,7 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import {StringOutputParser, CommaSeparatedListOutputParser} from  '@langchain/core/output_parsers'
+import {StructuredOutputParser} from 'langchain/output_parsers'
 
 
 import * as dotenv from 'dotenv'
@@ -38,5 +39,32 @@ async function callListOutputParser(){
         word: 'happy'
     })
 }
-const response = await callStringOutputParser()
+
+
+//structured output parser
+
+async function callStructuredParser(){
+    const prompt = ChatPromptTemplate.fromTemplate(`
+        Extract information from the following phrase.
+        Formatting Instructions: {format_instructions}
+        Phrase: {phrase}.
+    `);
+
+    const outputParser = StructuredOutputParser.fromNamesAndDescriptions({
+        name: "The name of the person",
+        age: "The age of the person",
+    })
+
+    const chain = prompt.pipe(model).pipe(outputParser);
+    return await chain.invoke({
+        phrase: 'My name is Michael and I am 29 years old',
+        format_instructions: outputParser.getFormatInstructions(),
+    })
+}
+
+
+// const response = await callStringOutputParser()
+// const response = await callListOutputParser()
+
+const response = await callStructuredParser()
 console.log(response)
