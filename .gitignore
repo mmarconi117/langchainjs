@@ -1,1 +1,30 @@
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
+
+# Environment variables
 .env
+.env.local
+.env.*.local
+
+# Log files
+*.log
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# TypeScript
+*.tsbuildinfo
+
+# Build output
+/build
+/out
