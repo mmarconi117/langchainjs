@@ -30,7 +30,7 @@ return await chain.invoke({
 }
 async function callListOutputParser(){
     const prompt = ChatPromptTemplate.fromTemplate(`
-        Provideo 5 synonyms, seperated by commas, for the following {word}
+        Provide 5 synonyms, seperated by commas, for the following {word}
     `);
 
     const outputParser = new CommaSeparatedListOutputParser();
