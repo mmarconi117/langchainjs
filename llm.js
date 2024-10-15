@@ -12,13 +12,8 @@ async function askQuestion(question) {
         const response = await model.call([{ role: 'user', content: question }]); // Format the message
         console.log("Raw Response:", response); // Log the raw response for debugging
 
-        // Ensure to check the response structure
-        if (response.generations && response.generations.length > 0) {
-            const answer = response.generations[0][0].text; // Adjusted to the correct path
-            console.log(`AI: ${answer}`);
-        } else {
-            console.log("No response generated.");
-        }
+        const answer = response.content; // Directly access the content property
+        console.log(`AI: ${answer}`);
     } catch (error) {
         console.error("Error:", error); // Log any errors that occur
     }
