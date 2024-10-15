@@ -20,7 +20,16 @@ async function askQuestion(question) {
 }
 
 console.log("Hello! I'm your AI assistant. You can ask me anything.");
+
+// Input handling to ask questions
 process.stdin.on('data', async (input) => {
     const question = input.toString().trim();
+
+    // Check for exit command
+    if (question.toLowerCase() === 'exit') {
+        console.log("Exiting the AI assistant. Goodbye!");
+        process.exit(); // Exit the program
+    }
+
     await askQuestion(question);
 });
